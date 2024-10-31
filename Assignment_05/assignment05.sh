@@ -1,3 +1,5 @@
+#Write a Program to find the greatest of three numbers
+
 #!bin/bash
 
 
