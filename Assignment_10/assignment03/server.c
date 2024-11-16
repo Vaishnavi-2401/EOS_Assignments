@@ -18,7 +18,7 @@ int main()
     
     //2. bind the address
     serv_addr.sun_family = AF_UNIX;
-    strcpy(serv_addr.sun_path, SOCK_FILE);  
+    strcpy(serv_addr.sun_path, SOCK_FILE);
     ret = bind(serv_fd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
     
     //3. listen to server socket
@@ -30,9 +30,11 @@ int main()
     //8. read data from client
     read(cli_fd, msg, sizeof(msg));
     printf("client: %d %d\n", msg[0],msg[1]);
-         
-    //operation :addition
+    
+    //operation: Addition
     msg[2]=msg[0]+msg[1];
+    
+    //9. send data to client
     write(cli_fd, msg, sizeof(msg));
     
     //12. close client socket
@@ -43,7 +45,5 @@ int main()
     
     //14. delete the socket file
     unlink(SOCK_FILE);
-    
     return 0;
 }
-

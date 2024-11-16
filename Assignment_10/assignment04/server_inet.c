@@ -6,7 +6,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 
-#define SERV_ADDR   "172.18.7.26"
+#define SERV_ADDR   "127.0.0.1"
 #define SERV_PORT   2809
 
 int main() 
@@ -14,7 +14,7 @@ int main()
     int ret, serv_fd, cli_fd;
     struct sockaddr_in serv_addr, cli_addr;
     socklen_t socklen = sizeof(cli_addr);
-    char msg[512];
+    int msg[512];
     
     //1. create server socket
     serv_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -30,18 +30,17 @@ int main()
     
     //6. accept client connection
     cli_fd = accept(serv_fd, (struct sockaddr*)&cli_addr, &socklen);
-    do 
-    {
-        //8. read data from client
-        read(cli_fd, msg, sizeof(msg));
-        printf("client: %s\n", msg);
-        
-        //9. send data to client
-        printf("server: ");
-        gets(msg);
-        write(cli_fd, msg, strlen(msg)+1);
-    }
-    while(strcmp(msg, "bye")!=0);
+   
+    //8. read data from client
+    read(cli_fd, msg, sizeof(msg));
+    printf("client: %d %d\n",msg[0],msg[1]);
+    
+    //addition operation
+    msg[2] = msg[0] + msg[1];
+    
+    //9. send data to client
+    write(cli_fd, msg, sizeof(msg));
+    
     //12. close client socket
     close(cli_fd);
     

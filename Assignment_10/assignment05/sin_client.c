@@ -6,7 +6,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 
-#define SERV_ADDR   "172.18.7.123"
+#define SERV_ADDR   "172.18.7.26"
 #define SERV_PORT   2809
 
 int main() 
@@ -32,12 +32,10 @@ int main()
         
         //10. read data from server
         read(cli_fd, msg, sizeof(msg));
-        printf("server: %s\n", msg);        
+        printf("server: %s\n", msg);
     }
     while(strcmp(msg, "bye")!=0);
-    
-    //11. close client socket
-    close(cli_fd);
-    
-    return 0;
+    	//11. close client socket
+    	close(cli_fd);
+    	return 0;
 }
